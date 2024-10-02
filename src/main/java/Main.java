@@ -10,6 +10,7 @@ public class Main {
         MyFrame frame = new MyFrame(nazwa,rozmiarX,rozmiarY,tlo);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
+
         frame.setVisible(true);
     }
 }
