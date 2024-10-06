@@ -25,6 +25,12 @@ public class MyPanel extends JPanel {
         add(buttonComponent);
         addComponentArray(buttonComponent.getComponents());
 
+        MouseComponent mouseComponent = new MouseComponent(this);
+
+        addMouseMotionListener(mouseComponent);
+        addMouseListener(mouseComponent);
+
+
         //drawComponentList.add(new DrawComponent("rectangle",300,345,500,495));
         setPanelSize();
         requestFocus();
@@ -53,7 +59,6 @@ public class MyPanel extends JPanel {
         drawable.draw(g2);
     }
 
-
     public void addDrawable(DrawComponent drawComponent){
         boolean isComponentUnique = true;
         for(DrawComponent drawable: drawComponentList){
@@ -64,9 +69,30 @@ public class MyPanel extends JPanel {
         }
         if(isComponentUnique){
             drawComponentList.add(drawComponent);
+            addMouseMotionListener(drawComponent);
+            addMouseListener(drawComponent);
             repaint();
         }
         System.out.println(drawComponentList.size());
+        System.out.println(drawComponentList);
+    }
+
+    public Component getComponentAt(int x, int y){
+        for(DrawComponent drawComponent: drawComponentList){
+            if(drawComponent.xStart == x && drawComponent.yStart == y){
+                return drawComponent;
+            }
+        }
+        return null;
+    }
+
+    public void clearDrawable(){
+        drawComponentList.clear();
+        repaint();
+    }
+
+    public void forcedRepaint(){
+        repaint();
     }
 
     private void setPanelSize(){

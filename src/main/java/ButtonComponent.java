@@ -8,6 +8,7 @@ public class ButtonComponent extends JComponent {
     JButton rectangleButton = new JButton("Rectangle");
     JButton circleButton = new JButton("Circle");
     JButton lineButton = new JButton("Line");
+    JButton clearButton = new JButton("Clear");
 
     JTextField xTextField = new JTextField("150");
     JTextField yTextField = new JTextField("120");
@@ -27,6 +28,13 @@ public class ButtonComponent extends JComponent {
         setLayout(null);
         setVisible(true);
 
+        clearButton.setBounds(buttonSize.width,0,buttonSize.width,buttonSize.height);
+        clearButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                myPanel.clearDrawable();
+            }
+        });
+
         xTextField.setBounds(0,150,buttonSize.width,buttonSize.height);
         xTextField.setBackground(Color.cyan);
         xTextField.setForeground(Color.black);
@@ -40,11 +48,13 @@ public class ButtonComponent extends JComponent {
         colorChooser.setBounds(0,350,buttonSize.width+350,buttonSize.height+200);
         colorChooser.setColor(Color.GREEN);
 
-        add(colorChooser);
+        //add(colorChooser);
         add(xTextField);
         add(yTextField);
         add(xEndTextField);
         add(yEndTextField);
+
+        add(clearButton);
 
         rectangleButton.setSize(buttonSize);
         rectangleButton.setBounds(0,0,buttonSize.width,buttonSize.height);
@@ -56,7 +66,9 @@ public class ButtonComponent extends JComponent {
                     Integer.parseInt(yTextField.getText()),
                     Integer.parseInt(xEndTextField.getText()),
                     Integer.parseInt(yEndTextField.getText()),
-                    colorChooser.getColor()));
+                    colorChooser.getColor(),
+                    myPanel
+            ));
         });
         add(rectangleButton);
 
@@ -69,7 +81,9 @@ public class ButtonComponent extends JComponent {
                     Integer.parseInt(yTextField.getText()),
                     Integer.parseInt(xEndTextField.getText()),
                     Integer.parseInt(yEndTextField.getText()),
-                     colorChooser.getColor()));
+                    colorChooser.getColor(),
+                    myPanel
+            ));
             System.out.println("circle");
         });
         add(circleButton);
@@ -84,7 +98,8 @@ public class ButtonComponent extends JComponent {
                     Integer.parseInt(yTextField.getText()),
                     Integer.parseInt(xEndTextField.getText()),
                     Integer.parseInt(yEndTextField.getText()),
-                    colorChooser.getColor()
+                    colorChooser.getColor(),
+                    myPanel
             ));
             //myPanel.setShapeToDraw(selectedShape);
         });
