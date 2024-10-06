@@ -37,7 +37,7 @@ public class ButtonComponent extends JComponent {
         yEndTextField.setBounds(0,300,buttonSize.width,buttonSize.height);
         JColorChooser colorChooser = new JColorChooser();
 
-        colorChooser.setBounds(0,350,buttonSize.width+200,buttonSize.height+200);
+        colorChooser.setBounds(0,350,buttonSize.width+350,buttonSize.height+200);
         colorChooser.setColor(Color.GREEN);
 
         add(colorChooser);
@@ -56,7 +56,7 @@ public class ButtonComponent extends JComponent {
                     Integer.parseInt(yTextField.getText()),
                     Integer.parseInt(xEndTextField.getText()),
                     Integer.parseInt(yEndTextField.getText()),
-                    Color.ORANGE));
+                    colorChooser.getColor()));
         });
         add(rectangleButton);
 
@@ -69,7 +69,7 @@ public class ButtonComponent extends JComponent {
                     Integer.parseInt(yTextField.getText()),
                     Integer.parseInt(xEndTextField.getText()),
                     Integer.parseInt(yEndTextField.getText()),
-                    Color.GREEN));
+                     colorChooser.getColor()));
             System.out.println("circle");
         });
         add(circleButton);
@@ -78,12 +78,13 @@ public class ButtonComponent extends JComponent {
         lineButton.setBounds(0,100,buttonSize.width,buttonSize.height);
         lineButton.addActionListener(e -> {
             selectedShape = "line";
+
             myPanel.addDrawable(new DrawComponent(selectedShape,
                     Integer.parseInt(xTextField.getText()),
                     Integer.parseInt(yTextField.getText()),
                     Integer.parseInt(xEndTextField.getText()),
                     Integer.parseInt(yEndTextField.getText()),
-                    Color.CYAN
+                    colorChooser.getColor()
             ));
             //myPanel.setShapeToDraw(selectedShape);
         });
