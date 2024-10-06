@@ -9,8 +9,6 @@ public class MyPanel extends JPanel {
     int sizeX,sizeY;
 
     JButton testButton = new JButton("TestButton");
-    JTextField textFieldX = new JTextField("100");
-    JTextField textFieldY = new JTextField("100");
 
     Graphics2D g2;
 
@@ -26,10 +24,7 @@ public class MyPanel extends JPanel {
         ButtonComponent buttonComponent = new ButtonComponent(this);
         add(buttonComponent);
         addComponentArray(buttonComponent.getComponents());
-        textFieldX.setBounds(500,700,100,30);
-        textFieldY.setBounds(600,730,100,30);
-        add(textFieldX);
-        add(textFieldY);
+
         //drawComponentList.add(new DrawComponent("rectangle",300,345,500,495));
         setPanelSize();
         requestFocus();
@@ -37,7 +32,7 @@ public class MyPanel extends JPanel {
 
     private void addComponentArray(Component[] components){
         for (Component component: components) {
-            component.setBackground(Color.YELLOW);
+            //component.setBackground(Color.YELLOW);
 
             add(component);
         }
@@ -46,7 +41,7 @@ public class MyPanel extends JPanel {
     public void paintComponent(Graphics g){
         this.g2 = (Graphics2D) g;
         super.paintComponent(g2);
-        g2.setColor(Color.BLACK);
+        g2.setColor(Color.WHITE);
         //drawTestObjects();
 
         for(Drawable drawable: drawComponentList){
