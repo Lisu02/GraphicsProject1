@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Component;
+import java.util.LinkedList;
 
 public class MyPanel extends JPanel {
 
@@ -8,25 +9,28 @@ public class MyPanel extends JPanel {
     int sizeX,sizeY;
 
     JButton testButton = new JButton("TestButton");
-    JTextField textField = new JTextField("TestText");
+    JTextField textFieldX = new JTextField("100");
+    JTextField textFieldY = new JTextField("100");
 
     Graphics2D g2;
+
+    LinkedList<DrawComponent> drawComponentList = new LinkedList<>();
+
+    String shapeToDraw = "";
 
     public MyPanel(int sizeX, int sizeY){
         setLayout(null); //SETLAYOUT NULL DLA JPANEL przyciski w dowolnym miejscu z setBounds!
         this.sizeX = sizeX;
         this.sizeY = sizeY;
 
-        ButtonComponent buttonComponent = new ButtonComponent();
+        ButtonComponent buttonComponent = new ButtonComponent(this);
+        add(buttonComponent);
         addComponentArray(buttonComponent.getComponents());
-        //testButton.setBackground(Color.GREEN);
-        //testButton.setSize(100,350);
-        //testButton.setBounds(400,700,100,30);
-        textField.setBounds(500,700,100,30);
-        //testButton.setLayout(null);
-        //textField.setLayout(null);
-        add(textField);
-        //add(testButton);
+        textFieldX.setBounds(500,700,100,30);
+        textFieldY.setBounds(600,730,100,30);
+        add(textFieldX);
+        add(textFieldY);
+        //drawComponentList.add(new DrawComponent("rectangle",300,345,500,495));
         setPanelSize();
         requestFocus();
     }
@@ -43,11 +47,31 @@ public class MyPanel extends JPanel {
         this.g2 = (Graphics2D) g;
         super.paintComponent(g2);
         g2.setColor(Color.BLACK);
-        drawTestObjects();
+        //drawTestObjects();
+
+        for(Drawable drawable: drawComponentList){
+            drawMyComponent(drawable);
+        }
     }
 
-    private void paintButtons(Graphics2D g2){
-        //buttonComponent
+    public void drawMyComponent(Drawable drawable){
+        drawable.draw(g2);
+    }
+
+
+    public void addDrawable(DrawComponent drawComponent){
+        boolean isComponentUnique = true;
+        for(DrawComponent drawable: drawComponentList){
+            if(drawComponent.componentEquals(drawable)){
+                isComponentUnique = false;
+                System.out.println(isComponentUnique);
+            }
+        }
+        if(isComponentUnique){
+            drawComponentList.add(drawComponent);
+            repaint();
+        }
+        System.out.println(drawComponentList.size());
     }
 
     private void setPanelSize(){

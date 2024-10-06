@@ -8,6 +8,8 @@ public class MyFrame extends JFrame {
         MyPanel panel = new MyPanel(rozmiarX, rozmiarY);
         panel.setBackground(tlo);
         add(panel);
+        pack();
+        setVisible(true);
     }
 
 }
