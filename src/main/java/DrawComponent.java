@@ -73,7 +73,7 @@ public class DrawComponent extends JComponent implements Drawable, MouseListener
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.RED);
-        g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
+        //g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
         g.setColor(color);
         revertParameters();
         switch (shape) {

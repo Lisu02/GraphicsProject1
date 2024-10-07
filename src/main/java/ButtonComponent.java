@@ -63,7 +63,7 @@ public class ButtonComponent extends JComponent {
         colorChooser.setBounds(0,350,buttonSize.width+350,buttonSize.height+200);
         colorChooser.setColor(Color.GREEN);
 
-        //add(colorChooser);
+        add(colorChooser);
         add(xTextField);
         add(yTextField);
         add(xEndTextField);
