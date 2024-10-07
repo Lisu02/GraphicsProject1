@@ -134,7 +134,8 @@ public class ButtonComponent extends JComponent {
                 g.drawOval(300,150,buttonSize.width,buttonSize.height);
                 break;
             case "rectangle":
-                g.drawRect(300,150,buttonSize.width,buttonSize.height);
+                //g.drawRect(300,150,buttonSize.width,buttonSize.height);
+                //g.fillRect(300,150,buttonSize.width,buttonSize.height);
             default:
                 break;
         }

@@ -78,13 +78,16 @@ public class DrawComponent extends JComponent implements Drawable, MouseListener
         revertParameters();
         switch (shape) {
             case "circle":
-                g.drawOval(xStart,yStart,xEnd-xStart,yEnd-yStart);
+                //g.drawOval(xStart,yStart,xEnd-xStart,yEnd-yStart);
+                g.fillOval(xStart,yStart,xEnd-xStart,yEnd-yStart);
                 break;
             case "rectangle":
-                g.drawRect(xStart,yStart,xEnd-xStart,yEnd-yStart);
+                //g.drawRect(xStart,yStart,xEnd-xStart,yEnd-yStart);
+                g.fillRect(xStart,yStart,xEnd-xStart,yEnd-yStart);
                 break;
             case "line":
                 g.drawLine(xStart,yStart,xEnd,yEnd);
+                //g.fillRect(xStart,yStart,xEnd,yEnd);
                 break;
         }
     }
