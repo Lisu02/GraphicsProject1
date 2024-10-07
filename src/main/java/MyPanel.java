@@ -12,7 +12,7 @@ public class MyPanel extends JPanel {
 
     Graphics2D g2;
 
-    LinkedList<DrawComponent> drawComponentList = new LinkedList<>();
+    public LinkedList<DrawComponent> drawComponentList = new LinkedList<>();
 
     String shapeToDraw = "";
 

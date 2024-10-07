@@ -10,6 +10,9 @@ public class ButtonComponent extends JComponent {
     JButton lineButton = new JButton("Line");
     JButton clearButton = new JButton("Clear");
 
+    JButton saveButton = new JButton("Save");
+    JButton loadButton = new JButton("Load");
+
     JTextField xTextField = new JTextField("150");
     JTextField yTextField = new JTextField("120");
     JTextField xEndTextField = new JTextField("300");
@@ -34,6 +37,18 @@ public class ButtonComponent extends JComponent {
                 myPanel.clearDrawable();
             }
         });
+
+        saveButton.setBounds(buttonSize.width,50,buttonSize.width,buttonSize.height);
+        saveButton.addActionListener(e -> {
+            SaveAndReadFile.saveToFile(myPanel.drawComponentList);
+        });
+        add(saveButton);
+
+        loadButton.setBounds(buttonSize.width,100,buttonSize.width,buttonSize.height);
+        loadButton.addActionListener(e -> {
+            SaveAndReadFile.readFromFile(myPanel);
+        });
+        add(loadButton);
 
         xTextField.setBounds(0,150,buttonSize.width,buttonSize.height);
         xTextField.setBackground(Color.cyan);

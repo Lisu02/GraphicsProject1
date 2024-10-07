@@ -17,7 +17,7 @@ public class DrawComponent extends JComponent implements Drawable, MouseListener
 
     MyPanel myPanel;
 
-    int offsetX, offsetY;
+    int offsetX, offsetY, offsetXEnd, offsetYEnd;
 
 
     public DrawComponent(String shape,int xStart, int yStart, int xEnd, int yEnd,MyPanel myPanel) {
@@ -47,13 +47,35 @@ public class DrawComponent extends JComponent implements Drawable, MouseListener
         this.myPanel = myPanel;
     }
 
+    private boolean checkParameters(){
+        return false;
+    }
+
+    private void revertParameters(){
+        if(xStart > xEnd && yStart > yEnd){
+
+        }
+        if(xStart > xEnd){
+            int tmp = xStart;
+            xStart = xEnd;
+            xEnd = tmp;
+        }
+        if(yStart > yEnd){
+            int tmp = yStart;
+            yStart = yEnd;
+            yEnd = tmp;
+        }
+
+
+    }
+
 
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.RED);
         g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
         g.setColor(color);
-
+        revertParameters();
         switch (shape) {
             case "circle":
                 g.drawOval(xStart,yStart,xEnd-xStart,yEnd-yStart);
@@ -86,11 +108,20 @@ public class DrawComponent extends JComponent implements Drawable, MouseListener
     @Override
     public void mousePressed(MouseEvent e) {
         System.out.println("mousePressed");
-        if(isInside(e.getPoint())){
+        if(isInside(e.getPoint()) && SwingUtilities.isMiddleMouseButton(e)){
+            System.out.println("Inside isInside");
+            isDragging = true;
+            offsetX = e.getX() - xEnd;
+            offsetY = e.getY() - yEnd;
+        }
+        if(isInside(e.getPoint()) && SwingUtilities.isLeftMouseButton(e)){
             System.out.println("Inside isInside");
             isDragging = true;
             offsetX = e.getX() - xStart;
+            offsetXEnd = e.getX() - xEnd;
             offsetY = e.getY() - yStart;
+            offsetYEnd = e.getY() - yEnd;
+
         }
     }
 
@@ -113,12 +144,27 @@ public class DrawComponent extends JComponent implements Drawable, MouseListener
     @Override
     public void mouseDragged(MouseEvent e) {
         //System.out.println("mouseDragged");
-        if(isDragging){
+        if(isDragging && SwingUtilities.isMiddleMouseButton(e)){
             System.out.println("Inside isDragging");
             int newX = e.getX() - offsetX;
             int newY = e.getY() - offsetY;
+            xEnd = newX;
+            yEnd = newY;
+            bounds = new Rectangle(xStart, yStart, xEnd - xStart, yEnd - yStart);
+            repaint();
+            myPanel.forcedRepaint();
+        }
+        if(isDragging && SwingUtilities.isLeftMouseButton(e)){
+            System.out.println("Inside isDragging");
+            int newX = e.getX() - offsetX;
+            int newY = e.getY() - offsetY;
+            int newXEnd = e.getX() - offsetXEnd;
+            int newYEnd = e.getY() - offsetYEnd;
             xStart = newX;
             yStart = newY;
+            xEnd = newXEnd;
+            yEnd = newYEnd;
+            bounds = new Rectangle(xStart, yStart, xEnd - xStart, yEnd - yStart);
             repaint();
             myPanel.forcedRepaint();
         }
@@ -137,4 +183,9 @@ public class DrawComponent extends JComponent implements Drawable, MouseListener
         return bounds;
     }
 
+
+    @Override
+    public String toString(){
+        return shape + "|" +xStart + "|" + yStart + "|" + xEnd + "|" + yEnd + "|" + color;
+    }
 }
